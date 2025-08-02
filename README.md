@@ -34,4 +34,10 @@ Let's assume clients are not available for calls, and all communication happens 
 
 ## Initial mails
 
-With above requirements, let's say our Product owner have following mail chain with the customers. Assume customer name is Mac and product owner name is Prince
+With above requirements, let's say our Product owner have [following mail chain](./emails/mailchain1.md) with the customers. Assume customer name is Mac and product owner name is Prince
+
+## Software Requirement Specifications (SRS)
+
+Following the above mailchain, Product Owner/Business Analyst deliver following [SRS](./docs/srs.md) for client review.
+
+Generally, clients takes time to approve SRS, but since our goal is to go to development quickly, lets assume client accepted the SRS.
