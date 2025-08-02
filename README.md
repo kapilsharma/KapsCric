@@ -31,3 +31,7 @@ We need to make a clone of ESPNCricInfo. It should have following features
 These are the initial requirements given by the client. Obviously they are not enough for Business Analyst/Product Owner, to comeup with Software Requirements Specifications (SRS). He/She should comeup with followup questions to be discussed over email/call.
 
 Let's assume clients are not available for calls, and all communication happens over the email/chat, so that we can list it here. 
+
+## Initial mails
+
+With above requirements, let's say our Product owner have following mail chain with the customers. Assume customer name is Mac and product owner name is Prince
