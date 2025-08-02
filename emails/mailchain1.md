@@ -133,3 +133,95 @@ Let me know if you have any other questions
 Thanks,
 Mac,
 KAPsCric.
+
+## Reply 2 Prince to Mac
+
+Subject: Follow-Up Questions for KapsCric MVP Requirements
+
+Dear Mac,
+
+Thank you for your detailed responses regarding the KapsCric project. Your answers have provided a clear direction for the MVP, focusing on IPL match listings, live text-based commentary, and a scoreboard, with a streamlined user management system. To finalize the Software Requirements Specification (SRS) and ensure our design aligns with your expectations, we have a few additional questions. As before, we’ve outlined them below for your convenience. Please address these at your earliest convenience, either by responding to each point or providing general clarifications.
+
+### Feature-Specific Questions
+
+#### Upcoming Matches
+
+**Match Data Entry:** Since Role: admin will manually enter match data, should there be a form or interface for inputting match details (e.g., teams, date, time, venue)? Are there specific validation rules (e.g., mandatory fields, date formats)?
+Historical Matches: You mentioned a separate page for historical matches. Should this page be included in the MVP, or can it be deferred to a later phase? If included, what details should be displayed (e.g., final scores, commentary archive)?
+Match Status Updates: Who updates the match status (e.g., from “upcoming” to “live” to “completed”)? Is this a manual process by Role: admin, or should it be automated based on date/time?
+
+Live Commentary
+
+Commentary Input: Should Role: commentator have a specific interface for ball-by-ball commentary (e.g., predefined fields for ball number, runs, wickets, or free-text)? Are there templates or standard phrases they can use to speed up input?
+Commentary Volume: What is the expected frequency of commentary updates per over (e.g., one comment per ball, or more/less frequent)? This will help us optimize the real-time update mechanism (WebSocket or polling every 5 seconds).
+Error Handling: If a Role: commentator makes a mistake in their commentary, should they be able to edit/delete entries during the match, or is this not needed for MVP?
+
+Scoreboard
+
+Scoreboard Details: The provided scorecard.png shows a detailed layout (runs, wickets, overs, batsmen, bowlers, etc.). Should Role: admin or Role: commentator manually input scoreboard data (e.g., runs per ball, wickets), or should we plan for integration with a future API? For MVP, who is responsible for updating the scoreboard in real-time?
+Display Format: Should the scoreboard be purely text-based, or are graphical elements (e.g., progress bars, run-rate graphs) required for MVP?
+
+User Management
+
+Account Creation Workflow: Should Role: superadmin and Role: admin have an admin panel or interface to create accounts, or is direct database access sufficient for MVP?
+Role Limits: Is there a maximum number of Role: admin or Role: commentator accounts that can be created (e.g., to prevent overloading the system during MVP)?
+Visitor Access: Should Role: visitor have any limitations on viewing live commentary or scoreboards (e.g., rate limits, session timeouts)?
+
+Technical and Operational Questions
+
+Database Storage: What is the expected volume of match data and commentary for the MVP (e.g., number of matches, average commentary entries per match)? This will guide our database design.
+Real-Time Updates: You mentioned real-time updates are preferred but polling every 5 seconds is acceptable. Are there specific performance constraints (e.g., server cost limits) we should prioritize over real-time accuracy?
+Security: For email/password authentication, are there specific password strength requirements or account recovery processes (e.g., password reset via email) needed for MVP?
+Testing Environment: Since you mentioned test runs with 30–40 users, should we set up a separate staging environment for these tests, or is the production environment sufficient?
+
+Timeline and Deliverables
+
+MVP Definition: To confirm, the MVP includes:
+Role: admin manually adding IPL match details (teams, date, time, venue).
+Role: commentator providing text-based ball-by-ball commentary.
+Role: visitor viewing current/upcoming matches and live commentary/scoreboard without registration.
+Email/password authentication for Role: admin and Role: commentator.Is this correct, or are there additional features you’d like included in the MVP?
+
+
+Timeline Expectations: You emphasized a fast delivery for the MVP to showcase to investors. Can you specify a target delivery date (e.g., 4–6 weeks from now) or any investor demo deadlines?
+
+Please let us know your responses to these questions or any additional details that could help us refine the requirements. If there are other stakeholders we should include, kindly share their contact information. We’re eager to move forward with the SRS and begin designing the system to meet your goals.
+Best regards,PrinceProduct OwnerKapsCric Project Team
+
+
+## Reply 3: Mac to Prince
+
+Hi Prince,
+
+Thanks for taking the time and come up with the clarification questions. PFA my responses below
+
+- Feature sepcific questions
+  - Upcoming Matches
+    - Match data entry
+      - Yes, we should have some page or form for Admin to add/edit matches. Site wise, date format should be D/M/YY like 1/2/25 for short date and DD/MMM/YYYY like 01/Jan/2025 for long date. If date comes in text, it should be like 1st January 2025 or Jaruary 1, 2025.
+      - We can defer historical matches page for a later time to get MVP quickly.
+      - Match status: It should happen automatically based on current date and time. Match in future date will be upcoming matches. Match on past date time but not finished (no result) will be current matches. Matches with result will be considered as historical matches.
+    - Live commentary
+      - Commentary input: Yes, we must have specific page, accessible only to the commentators assigned on a given match. We may want to discuss about that page in details, so that, commentator can do efficient commentery with minimal input. For example, for every ball, he should get buttoms like W, 0, 1, 2, 3, 4, 6 so that result of ball is published quickly. We could also have button for wide, no ball, etc. Later they can add text commentery to be updated later.
+      - Commentary volume: Commentary will be updated after every ball. Updating commentary should automatically update the scoreboard.
+      - Error handling is a much needed feature as anyone can make a mistake. However, it can be deffered until after MVP.
+    - Scoreboard
+      - Scoreboard details: No, it must be updated automatically. Before the match  start, we can ask the commentator for the detials like player details for both teams. When an inning start, commentator should enter which two batsman are opening from the list of players. After every wicket, we should ask who is new batsman. Similarly, before every over, we must ask who is the next baller. After every deliver, we enter score. Based on score, we must update batsman and team score as well as who is next batsman on strike.
+      - Display format: For MVP, let's keep it text-based. In future, we will need graphical elements. However, text based do not mean minimal design. It must look polished design as in the screenshot attached in previous mail.
+    - User management
+      - Yes, we must have an interface for all kind of data entry, including account creation. Only exception is one super admin account, which must be present in database so that he can login and add other data.
+      - Rate limit: There is no such limit. However, we can assume in the starting, there will be less than 15 system accounts. System accounts include superadmin, admin and commentator.
+      - Visitor access: No there is no limit on visitors. We want them to have best experience, as they are our end customers. Higher the number and better the experience for tham will be directly propotional to the revanue.
+    - Technical and operational questions
+      - Our first target is next season of IPL. There will be up to 70 matches per IPL season. Each match will have two inninga of 20 ovurs. Each over have 6 balls + few extra balls like wide, no ball etc. So on rough target. there could be 70 * 40 * 6 = 16800 commentery in first IPL season. However, later from next year, we plan to cover all national and international matches so the colume can be really very high. However, we need not to worry about it during MVP but must design our system so that it can scale.
+      - Real-time update: We should keep server cost minimal but it is not a constraints. Performance has higher priority than cost. I would suggest we start with minimal server for MVP, which will be tested internally with limited users. We should worry about scale only once we go public so we have few month time to reach there.
+      - Security: For MVP, username password are enough. We can have password length of 8 characters minimum with at least one Capital letter, one number and a special character. We definitely need account recovery provess. User should be able to reset the password through forgot password functionality.
+      - Test engironment: Testing will have separate test environment. MVP is available internally and will be there on stage environment. We will create production environment once we get stakeholder approval on MVP. So no need to worry about production environment for now.
+    - Timeline and deliverables
+      - MVP definition looks good.
+      - For MVP, we can skip few time taking parts to give initial demo as soon as possible. I'm looking for 4 weeks timeline for initial demo or Agile based development with demo after every sprint.
+
+I hope this clear some of the doubts. Feel free to let me know if you have other questions.
+
+Thanks,
+Mac.
