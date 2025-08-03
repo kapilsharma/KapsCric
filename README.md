@@ -41,3 +41,19 @@ With above requirements, let's say our Product owner have [following mail chain]
 Following the above mailchain, Product Owner/Business Analyst deliver following [SRS](./docs/srs.md) for client review.
 
 Generally, clients takes time to approve SRS, but since our goal is to go to development quickly, lets assume client accepted the SRS.
+
+## Technical Design Document (TDD)
+
+Once we have function requirements freeze, next step is to make the [Technical Design Document](./docs/tdd.md).
+
+Initial TD is attached in docs. TD is generally more detailed and also contains initial code and project setup. However  we are going to setup project and make document of it so I kept the TD short for now.
+
+## Backend setup
+
+We will be creaating backend in multiple languages and framework. However, let's start with Node. You can select below links for proper instructions
+
+- [Backend in NodeJS using Express.js, TypeScript, and MongoDB](./docs/backend-express-ts-mongo.md)
+
+## Docker setup
+
+We will use docker for working on the project locally. Code will go in their respective repository but I kept docker separate, to keep clear separation of backend and frontend. In the docs here, let's have [docker setup](./docs/docker.md) as the last step. Following that, all the docs will be available in respective project repository.
